@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 
 export const AddPassenger = () => {
-  const [passenger, setPassenger]= useState([{
+  const [passenger, setPassenger]= useState({
     name:"",
     age:"",
     gender:"",
     contact:"",
-    email:"",
-
-  }])
+    email:""
+  })
 
   const [passengers, setPassengers]= useState([])
 
@@ -23,10 +22,19 @@ export const AddPassenger = () => {
     
   const HandleSubmit= (e)=>{
     e.preventDefault()
-    
-    console.log(passenger)
+
+    setPassengers(prev=>[...prev, passenger])
+
+    setPassenger({
+      name:"",
+      age:"",
+      gender:"",
+      contact:"",
+      email:""
+    })
   }
   
+  console.log(passengers)
   console.log(passenger)
   return (
    <>
@@ -36,11 +44,11 @@ export const AddPassenger = () => {
         <br />
         <br />
         <label htmlFor="" >Age : </label>
-        <input type="text" name="age" value={passenger.age} />
+        <input type="text" name="age" value={passenger.age} onChange={HandleEvent}/>
         <br />
         <br />
         <label htmlFor="" >Gender : </label>
-        <select name="gender" value={passenger.gender}>
+        <select name="gender" value={passenger.gender} onChange={HandleEvent}>
           <option value="Others"> Others</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
@@ -48,11 +56,11 @@ export const AddPassenger = () => {
         <br />
         <br />
         <label htmlFor="">Contact number : </label>
-        <input type="text" name="contact" value={passenger.contact}/>
+        <input type="text" name="contact" value={passenger.contact}onChange={HandleEvent}/>
         <br />
         <br />
         <label htmlFor="" > Email : </label>
-        <input type="email" name="email" value={passenger.email} />
+        <input type="email" name="email" value={passenger.email} onChange={HandleEvent} />
 
         <button type='submit'>Add passenger</button>
       </form>
